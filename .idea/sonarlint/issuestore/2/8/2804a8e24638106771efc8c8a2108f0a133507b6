@@ -1,0 +1,9 @@
+
+d
+java:S2095"BUse try-with-resources or close this "Page" in a "finally" clause.(ƒàÒîøÿÿÿÿ8ÔÕ¶ôÁ1
+~
+java:S4087"bRemove this "close" call; closing the resource is handled automatically by the try-with-resources.(€ˆ™ 8ÕÕ¶ôÁ1
+I
+java:S1874",Remove this use of "type"; it is deprecated.(Š¸®‘8×Õ¶ôÁ1
+I
+java:S1874",Remove this use of "type"; it is deprecated.(—ˆ•Œ8ØÕ¶ôÁ1
