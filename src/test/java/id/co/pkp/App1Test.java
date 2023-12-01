@@ -83,4 +83,25 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Tooltip Check Test")
+    public void tooltipCheckTest() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+
+        Page page = browser.newPage();
+        page.navigate("https://jqueryui.com/tooltip/");
+        FrameLocator frameOne = page.frameLocator(".demo-frame");
+        Locator ageBox = frameOne.locator("#age");
+        Locator toolTipText = frameOne.locator(".ui-tooltip-content");
+        ageBox.hover();
+        String textContent = toolTipText.textContent();
+        System.out.println(textContent);
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
