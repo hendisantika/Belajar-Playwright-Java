@@ -3,6 +3,7 @@ package id.co.pkp;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.testng.asserts.SoftAssert;
 
 /**
  * Created by IntelliJ IDEA.
@@ -99,6 +100,31 @@ public class App1Test {
         ageBox.hover();
         String textContent = toolTipText.textContent();
         System.out.println(textContent);
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Soft Assertion Test")
+    public void softAssertionTest() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+        Page page = browser.newPage();
+        page.navigate("https://www.programsbuzz.com/user/login");
+        page.locator("#edit-name").type("yuji");
+        page.locator("#edit-pass").type("yuji");
+        page.locator("(//input[@type='submit'])[2]").click();
+        String actualText = page.locator("//a[normalize-space()='Forgot your password?']").textContent();
+        System.out.println(actualText);
+        String expectedText = "Forgot your password?";
+        SoftAssert soft = new SoftAssert();
+        soft.assertEquals(actualText, expectedText, "Matched");
+
+        System.out.println("This part is executed");
+        soft.assertAll();
 
         page.close();
         browser.close();
