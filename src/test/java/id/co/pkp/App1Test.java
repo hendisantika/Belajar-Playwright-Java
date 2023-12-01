@@ -196,7 +196,7 @@ public class App1Test {
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
         page.navigate("https://www.programsbuzz.com");
-        page.locator("//i[@class='fas fa-search']").click();
+        page.locator("#edit-submit--3").click();
         page.locator("//input[@id='edit-keys']").type("Playwright");
         page.locator("//input[@id='edit-submit']").click();
         page.goBack();
