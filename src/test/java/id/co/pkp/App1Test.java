@@ -3,6 +3,7 @@ package id.co.pkp;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 /**
@@ -125,6 +126,63 @@ public class App1Test {
 
         System.out.println("This part is executed");
         soft.assertAll();
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Assert Title Test")
+    public void assertTitleTest() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+        Page page = browser.newPage();
+        page.navigate("http://www.programsbuzz.com");
+        String title = page.title();
+        String expectedTitle = "ProgramsBuzz - Online Technical Courses";
+        if (title.equalsIgnoreCase(expectedTitle)) {
+            System.out.println("Title Match Verified");
+        } else {
+            System.out.println("Not a match!!");
+        }
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Assert Text On Web Page Test")
+    public void assertTextOnWebPageTest() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+        Page page = browser.newPage();
+        page.navigate("http://www.programsbuzz.com");
+        Locator body = page.locator("body");
+        String bodyText = body.textContent();
+        Assert.assertFalse(bodyText.contains("Spam Message"), "Spam Text Not Found!!");
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Get Current URL Test")
+    public void getCurrentURL() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+        Page page = browser.newPage();
+        page.navigate("http://www.programsbuzz.com/user/login");
+        page.locator("#edit-name").type("Naruto");
+        page.locator("#edit-pass").type("uzumaki");
+
+        String currentUrl = page.url();
+        System.out.println(currentUrl);
 
         page.close();
         browser.close();
