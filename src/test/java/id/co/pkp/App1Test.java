@@ -289,4 +289,20 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Get List of Elements in Playwright Java")
+    public void getListOfElements() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
+
+        Locator listEle = page.locator("//h3[@class='search-result__title']");
+
+        int count = listEle.count();
+
+        Assert.assertEquals(count, 10);
+
+    }
 }
