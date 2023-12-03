@@ -303,6 +303,9 @@ public class App1Test {
         int count = listEle.count();
 
         Assert.assertEquals(count, 10);
+        page.close();
+        browser.close();
+        playwright.close();
 
     }
 }
