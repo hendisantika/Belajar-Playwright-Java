@@ -89,3 +89,21 @@
 11:09:02.266 [ApplicationImpl pooled thread 330] INFO  c.b.l.BrowserStackRunExtension - junit
 11:09:02.267 [ApplicationImpl pooled thread 330] INFO  com.browserstack.utils.Helpers - null
 11:09:02.267 [ApplicationImpl pooled thread 330] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+11:11:09.096 [ApplicationImpl pooled thread 320] INFO  c.b.l.BrowserStackRunExtension - junit
+11:11:09.096 [ApplicationImpl pooled thread 320] INFO  com.browserstack.utils.Helpers - null
+11:11:09.097 [ApplicationImpl pooled thread 320] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+11:11:29.809 [ApplicationImpl pooled thread 320] INFO  c.b.l.BrowserStackRunExtension - junit
+11:11:29.809 [ApplicationImpl pooled thread 320] INFO  com.browserstack.utils.Helpers - null
+11:11:29.809 [ApplicationImpl pooled thread 320] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+11:12:06.184 [ApplicationImpl pooled thread 334] INFO  c.b.l.BrowserStackRunExtension - junit
+11:12:06.184 [ApplicationImpl pooled thread 334] INFO  com.browserstack.utils.Helpers - null
+11:12:06.184 [ApplicationImpl pooled thread 334] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+11:13:22.709 [ApplicationImpl pooled thread 334] INFO  c.b.l.BrowserStackRunExtension - junit
+11:13:22.709 [ApplicationImpl pooled thread 334] INFO  com.browserstack.utils.Helpers - null
+11:13:22.709 [ApplicationImpl pooled thread 334] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+11:13:42.180 [ApplicationImpl pooled thread 329] INFO  c.b.l.BrowserStackRunExtension - junit
+11:13:42.180 [ApplicationImpl pooled thread 329] INFO  com.browserstack.utils.Helpers - null
+11:13:42.180 [ApplicationImpl pooled thread 329] INFO  c.b.l.BrowserStackRunExtension - Agent path: null
+11:17:38.158 [ApplicationImpl pooled thread 329] INFO  c.b.l.BrowserStackRunExtension - junit
+11:17:38.159 [ApplicationImpl pooled thread 329] INFO  com.browserstack.utils.Helpers - null
+11:17:38.159 [ApplicationImpl pooled thread 329] INFO  c.b.l.BrowserStackRunExtension - Agent path: null

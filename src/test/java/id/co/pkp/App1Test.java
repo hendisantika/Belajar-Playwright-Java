@@ -242,15 +242,21 @@ public class App1Test {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
 
-        browser.newContext(new Browser.NewContextOptions().setViewportSize(1800, 880));
+//        browser.newContext(new Browser.NewContextOptions().setViewportSize(1800, 880));
+        browser.newContext(new Browser.NewContextOptions().setViewportSize(800, 600));
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
 
-        int width2 = (int) screenSize.getWidth();
-        int height2 = (int) screenSize.getHeight();
-        BrowserContext newContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width2, height2));
+//        int width2 = (int) screenSize.getWidth();
+//        int height2 = (int) screenSize.getHeight();
+//        BrowserContext newContext = browser.newContext(new Browser.NewContextOptions().setViewportSize(width2, height2));
+//        Page page = newContext.newPage();
+        Page page = browser.newPage();
+        page.navigate("https://www.google.co.id");
+        page.navigate("https://www.pkp.co.id");
+        page.close();
         browser.close();
         playwright.close();
     }
