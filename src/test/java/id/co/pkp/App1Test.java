@@ -315,6 +315,11 @@ public class App1Test {
         page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
         List<String> allTextContents = listEle.allTextContents();
         System.out.println(allTextContents);
+        allTextContents.forEach(System.out::println);
+
+        for (int i = 0; i < allTextContents.size(); i++) {
+            System.out.println(i + 1 + " -->" + allTextContents.get(i));
+        }
 
         page.close();
         browser.close();
