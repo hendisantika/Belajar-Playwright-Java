@@ -337,9 +337,30 @@ public class App1Test {
         page.locator("//input[@id= 'edit-name']").type("Naruto");
 //        page.locator("xpath=//input[@id= 'edit-name']").type("Naruto");
         page.locator("//input[@id= 'edit-pass']").type("Sasuke");
+        page.locator("//input[@id= 'edit-submit']").click();
+
+        page.navigate("https://programsbuzz.com");
+        String textContent = page.locator("div.container-fluid ul li >> nth=6").textContent();
+        System.out.println(textContent);
 
         page.close();
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Using ComboBox")
+    public void usingComboboxTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/dropdown1/");
+        page.selectOption(".custom-select", "item2");
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+
 }
