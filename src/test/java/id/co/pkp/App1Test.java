@@ -15,6 +15,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 /**
  * Created by IntelliJ IDEA.
  * Project : demo-playwright
@@ -730,4 +732,21 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Get API Request using Playwright Java")
+    public void getAPIRequestTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        Response response = page.navigate("https://reqres.in/api/users?page=2");
+        int status = response.status();
+        System.out.println(status);
+        assertEquals(status, 200);
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
 }
