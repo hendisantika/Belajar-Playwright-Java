@@ -637,13 +637,12 @@ public class App1Test {
         Page page = browser.newPage();
         page.navigate("http://demo.automationtesting.in/FileDownload.html");
 //        Download waitForDownload = page.waitForDownload(() -> page.locator("//a[@type='button']").click());
-//        Download waitForDownload = page.waitForDownload(page.locator("a.btn.btn-primary")::click);
-        Download waitForDownload = page.waitForDownload(page.locator("//html/body/section/div[1]/div/div/div[1]/a")::click);
+        Download waitForDownload = page.waitForDownload(page.locator("a.btn.btn-primary")::click);
+//        Download waitForDownload = page.waitForDownload(page.locator("//html/body/section/div[1]/div/div/div[1]/a")::click);
         // Wait for the download to start
         // Perform the action that initiates download
 // Wait for the download process to complete and save the downloaded file somewhere
         waitForDownload.saveAs(Paths.get("Downloads/", waitForDownload.suggestedFilename()));
-
 
         System.out.println(waitForDownload.url());
         System.out.println(waitForDownload.page().title());
@@ -659,4 +658,18 @@ public class App1Test {
         waitForDownload.delete() - This will delete the downloaded file.*/
     }
 
+    @Test
+    @DisplayName("Upload File in Playwright Java")
+    public void uploadFileTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://autopract.com/selenium/upload1/");
+        page.setInputFiles("//input[@type='file']",
+                Paths.get("/Users/hendisantika/IdeaProjects/fincore/demo-playwright/Uploads/ayana.png"));
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
