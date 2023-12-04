@@ -779,4 +779,30 @@ public class App1Test {
         playwright.close();
     }
 
+    @Test
+    @DisplayName("Put API Request using Playwright Java")
+    public void putAPIRequestTest() {
+        Playwright playwright = Playwright.create();
+        APIRequestContext request = playwright.request().newContext();
+
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+        HashMap<String, String> data = new HashMap<>();
+
+        data.put("name", "Sasuke");
+        data.put("job", "Uchiha");
+
+        String response = request.put("https://reqres.in/api/users/2", RequestOptions.create().setData(data)).text();
+        System.out.println(response);
+
+        JsonObject j = new Gson().fromJson(response, JsonObject.class);
+        System.out.println(j.get("name"));
+        System.out.println(j.get("job"));
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
 }
