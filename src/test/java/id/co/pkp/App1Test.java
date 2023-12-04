@@ -944,7 +944,7 @@ public class App1Test {
     @DisplayName("Check Frame Test 2")
     public void checkFrameTest2() {
         Playwright playwright = Playwright.create();
-        Browser browser = playwright.chromium().launch();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
 
         // creating a BrowserContext
         BrowserContext browserContext = browser.newContext();
@@ -976,6 +976,35 @@ public class App1Test {
         browser.close();
         playwright.close();
 
+    }
+
+    @Test
+    @DisplayName("Tabs & Windows Test")
+    public void tabsAndWindowsTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+
+        // creating a BrowserContext
+        BrowserContext browserContext = browser.newContext();
+
+        Page page = browserContext.newPage();
+
+        // Navigating to the URL
+        page.navigate("https://testkru.com/Elements/TextFields");
+        System.out.println("Title of current window: " + page.title());
+
+        // Creating a new BrowserContext
+        BrowserContext browserContext2 = browser.newContext();
+
+        // Navigating to the new URL
+        Page page2 = browserContext2.newPage();
+        page2.navigate("https://testkru.com/Elements/Buttons");
+
+        System.out.println("Title of new window: " + page2.title());
+
+        // closing the instances
+        browser.close();
+        playwright.close();
     }
 
 }

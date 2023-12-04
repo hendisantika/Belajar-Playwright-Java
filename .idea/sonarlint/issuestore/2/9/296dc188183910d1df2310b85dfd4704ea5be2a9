@@ -65,6 +65,8 @@ K
 java:S2699Ğ"-Add at least one assertion to this test case.(ÛÒà8Ş¦å¤Ã1
 K
 java:S2699±"-Add at least one assertion to this test case.(‘û´8‡úì¤Ã1
+K
+java:S2699×"-Add at least one assertion to this test case.(çŒØµ8úÍü¤Ã1
 :
 java:S5786)"Remove this 'public' modifier.(Å¾Êh8ß¦å¤Ã1
 @
@@ -145,8 +147,10 @@ A
 java:S5786æ"Remove this 'public' modifier.(¿¤”­ûÿÿÿÿ8à¦å¤Ã1
 <
 java:S5786±"Remove this 'public' modifier.(‘û´8à¦å¤Ã1
+<
+java:S5786×"Remove this 'public' modifier.(çŒØµ8à¦å¤Ã1
 ;
-java:S5786&"Remove this 'public' modifier.(€Ì¾™8à¦å¤Ã1
+java:S5786&"Remove this 'public' modifier.(€Ì¾™8ûÍü¤Ã1
 
 java:S1607Å"^Either add an explanation about why this test is skipped or remove the "@Disabled" annotation.(Ññæùÿÿÿÿ8ã¦å¤Ã1
 |
