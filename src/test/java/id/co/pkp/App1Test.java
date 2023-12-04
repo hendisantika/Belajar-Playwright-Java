@@ -382,16 +382,42 @@ public class App1Test {
         Locator autoC = page
                 .locator("//div[@class='ui-autocomplete-multiselect ui-state-default ui-widget ui-state-active']");
         int autoCcount = autoC.count();
+        System.out.println("autoCcount: " + autoCcount);
 
         page.pause();
 
         for (int i = 0; i < autoCcount; i++) {
             String autoCText = autoC.nth(i).textContent();
+            System.out.println("Yg dicari: " + autoCText);
             if (autoCText == expectedText) {
                 autoC.nth(i).click();
                 break;
             }
         }
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Check and Uncheck Checkbox in Playwright Java")
+    public void checkNUncheckCheckboxTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+//        Using Click
+        page.navigate("http://autopract.com/selenium/form5//");
+        page.locator("//input[@value='two']").click();
+
+//        Using Check
+        page.navigate("http://autopract.com/selenium/form5//");
+        page.locator("//input[@value='four']").check();
+
+//        Using Uncheck
+        page.navigate("http://autopract.com/selenium/form5//");
+        page.locator("//input[@value='four']").uncheck();
 
         page.close();
         browser.close();
