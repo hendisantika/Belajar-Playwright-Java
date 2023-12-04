@@ -370,5 +370,32 @@ public class App1Test {
         playwright.close();
     }
 
+    @Test
+    @DisplayName("Auto Complete Test")
+    public void autoCompleteTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        String expectedText = "Indonesia";
+
+        page.navigate("https://demo.automationtesting.in/AutoComplete.html");
+        Locator autoC = page
+                .locator("//div[@class='ui-autocomplete-multiselect ui-state-default ui-widget ui-state-active']");
+        int autoCcount = autoC.count();
+
+        page.pause();
+
+        for (int i = 0; i < autoCcount; i++) {
+            String autoCText = autoC.nth(i).textContent();
+            if (autoCText == expectedText) {
+                autoC.nth(i).click();
+                break;
+            }
+        }
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 
 }
