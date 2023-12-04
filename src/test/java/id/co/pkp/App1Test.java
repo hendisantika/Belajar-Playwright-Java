@@ -672,4 +672,19 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Mouse Hover Element in Playwright Java")
+    public void mouseHoverElementTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://www.w3schools.com/howto/howto_css_dropdown.asp");
+        Locator hover = page.locator(".dropbtn");
+        hover.hover();
+        page.locator("//*[@id=\"main\"]/div[3]/div/a[1]").click();
+        System.out.println(page.title());
+        browser.close();
+        playwright.close();
+    }
 }
