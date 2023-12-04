@@ -1007,4 +1007,31 @@ public class App1Test {
         playwright.close();
     }
 
+    @Test
+    @DisplayName("Open a new tab using Playwright")
+    public void openANewTabTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+
+        // creating a BrowserContext
+        BrowserContext browserContext = browser.newContext();
+
+        // creating a page
+        Page page1 = browserContext.newPage();
+
+        // Navigating to the URL
+        page1.navigate("https://testkru.com/Elements/TextFields");
+        System.out.println("Current tab title: " + page1.title());
+
+        // Opening second tab
+        Page page2 = browserContext.newPage();
+        page2.navigate("https://testkru.com/Elements/Buttons");
+        System.out.println("New tab title: " + page2.title());
+
+        // closing the instances
+        browser.close();
+        playwright.close();
+
+    }
+
 }
