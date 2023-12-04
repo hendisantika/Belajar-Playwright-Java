@@ -959,6 +959,14 @@ public class App1Test {
         Locator locator = frame.locator("h1");
         System.out.println("Text written inside the frame: " + locator.innerText());
 
+        // Navigating to the URL
+        page.navigate("https://testkru.com/Interactions/Frames");
+
+        FrameLocator frameLocator = page.frameLocator("#frame1").first();
+
+        Locator locator2 = frameLocator.locator("h1");
+        System.out.println("Text written inside the frame: " + locator2.innerText());
+
         // closing the instances
         browser.close();
         playwright.close();
