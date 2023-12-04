@@ -687,4 +687,21 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Double Click in Playwright Java")
+    public void doubleClickTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://testkru.com/Elements/Buttons");
+        Locator textClick = page.locator("#doubleClick");
+        textClick.dblclick();
+        String textContent = page.locator("#doubleClick").textContent();
+        System.out.println(textContent);
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
