@@ -330,6 +330,16 @@ public class App1Test {
     @Test
     @DisplayName("Using XPath")
     public void usingPathTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("https://www.programsbuzz.com/user/login");
+        page.locator("//input[@id= 'edit-name']").type("Naruto");
+//        page.locator("xpath=//input[@id= 'edit-name']").type("Naruto");
+        page.locator("//input[@id= 'edit-pass']").type("Sasuke");
 
+        page.close();
+        browser.close();
+        playwright.close();
     }
 }
