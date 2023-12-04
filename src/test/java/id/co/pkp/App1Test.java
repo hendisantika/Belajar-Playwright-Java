@@ -704,4 +704,30 @@ public class App1Test {
         browser.close();
         playwright.close();
     }
+
+    @Test
+    @DisplayName("Reusing Signed in State in Playwright Java")
+    public void reusingSignedInStateTest() {
+        Playwright playwright = Playwright.create();
+        BrowserContext browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false))
+                .newContext();
+
+        Page page = browser.newPage();
+        page.navigate("https://practicetestautomation.com/practice-test-login/");
+
+        page.locator("//input[@id='username']").type("student");
+        page.locator("//input[@id='password']").type("Password123");
+
+        page.locator("//button[@id='submit']").click();
+        String textContent = page
+                .locator("//strong[contains(text(),'Congratulations student. You successfully logged i')]")
+                .textContent();
+        System.out.println(textContent);
+
+        browser.storageState(new BrowserContext.StorageStateOptions().setPath(Paths.get("auth.json")));
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
 }
