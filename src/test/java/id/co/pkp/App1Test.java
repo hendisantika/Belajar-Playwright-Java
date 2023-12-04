@@ -611,4 +611,22 @@ public class App1Test {
         playwright.close();
     }
 
+    @Test
+    @DisplayName("Record Video in Playwright Java")
+    public void recordVideoTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        BrowserContext newContext = browser.newContext(
+                new Browser.NewContextOptions().setRecordVideoDir(Paths.get("Videos/")).setRecordVideoSize(1280, 720));
+        Page page = newContext.newPage();
+
+        page.navigate("https://www.programsbuzz.com/user/login");
+
+        page.locator("#edit-name").type("Naruto");
+        page.locator("#edit-pass").type("Madara");
+
+        newContext.close();
+        playwright.close();
+    }
+
 }
