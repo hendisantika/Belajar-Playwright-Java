@@ -5,9 +5,11 @@ import com.google.gson.JsonObject;
 import com.microsoft.playwright.Dialog;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.RequestOptions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.asserts.SoftAssert;
 
 import java.awt.*;
@@ -38,7 +40,6 @@ public class App1Test {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch();
         Page page = browser.newPage();
-//        page.navigate("https://pkp.co.id");
         page.navigate("https://www.google.co.id/");
         System.out.println( "Page Title nya adalah: "+page.title());
     }
@@ -68,18 +69,26 @@ public class App1Test {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
-        page.navigate("https://www.programsbuzz.com/user/login");
+        page.navigate("https://testkru.com/Elements/TextFields");
 
-        Locator searchBar = page.locator("#edit-keys--2");
-        String placeText = searchBar.getAttribute("search");
+        Locator textLocator = page.locator("#lastNameWithPlaceholder");
 
-        if (placeText.contains("Enter the terms you wish to search for")) {
+        String placeholder = textLocator.getAttribute("placeholder");
+        // using getAttribute() method to get the placeholder text
+        System.out.println("Placeholder text: " + placeholder);
+        String expectedText = "Enter your last name...";
+        SoftAssert soft = new SoftAssert();
+        soft.assertEquals(expectedText, placeholder, "MATCHED");
 
+        if (placeholder.contains("Enter your last name...")) {
             System.out.println("PASS");
-
         } else {
             System.out.println("FAIL! No such texts");
         }
+
+        page.close();
+        browser.close();
+        playwright.close();
     }
 
     @Test
@@ -349,11 +358,6 @@ public class App1Test {
         page.locator("//input[@id= 'edit-name']").type("Naruto");
 //        page.locator("xpath=//input[@id= 'edit-name']").type("Naruto");
         page.locator("//input[@id= 'edit-pass']").type("Sasuke");
-        page.locator("//input[@id= 'edit-submit']").click();
-
-        page.navigate("https://programsbuzz.com");
-        String textContent = page.locator("div.container-fluid ul li >> nth=6").textContent();
-        System.out.println(textContent);
 
         page.close();
         browser.close();
@@ -442,16 +446,20 @@ public class App1Test {
 
     @Test
     @DisplayName("Handle Frame in Playwright Java")
+    @Disabled()
+    @Ignore("Ignore Handle Frame in Playwright Java")
     public void handleFrameTest() {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
-        page.navigate("http://www.maths.surrey.ac.uk/explore/nigelspages/frame2.htm");
+//        page.navigate("http://www.maths.surrey.ac.uk/explore/nigelspages/frame2.htm");
+        page.navigate("https://testkru.com/Interactions/Frames");
 
-        FrameLocator middleFrame = page.frameLocator("//frame[@src='message.htm']");
+//        FrameLocator middleFrame = page.frameLocator("//frame[@src='message.htm']");
+        FrameLocator middleFrame = page.frameLocator("#frame1");
 
-        middleFrame.locator("//input[@name='name']").type("Naruto Uzumaki");
-        middleFrame.locator("//textarea[@name='suggestions']").type("I Am Inside The Frame");
+//        middleFrame.locator("//input[@name='name']").type("Naruto Uzumaki");
+//        middleFrame.locator("//textarea[@name='suggestions']").type("I Am Inside The Frame");
 
         page.close();
         browser.close();
@@ -477,7 +485,9 @@ public class App1Test {
 
     @Test
     @DisplayName("Handle Multiple Tabs in Playwright Java")
-    public void Test() {
+    @Disabled
+    @Ignore("Ignore Handle Multiple Tabs in Playwright Java")
+    public void HandleMultipleTabsTest() {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
@@ -825,6 +835,28 @@ public class App1Test {
         JsonObject j = new Gson().fromJson(response, JsonObject.class);
         System.out.println(j.get("name"));
         System.out.println(j.get("job"));
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Delete API Request using Playwright Java")
+    public void deleteAPIRequestTest() {
+        Playwright playwright = Playwright.create();
+        APIRequestContext request = playwright.request().newContext();
+
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+        HashMap<String, String> data = new HashMap<>();
+
+        data.put("name", "Sasuke");
+        data.put("job", "Uchiha");
+
+        String response = request.delete("https://reqres.in/api/users/2", RequestOptions.create().setData(data)).text();
+        System.out.println(response);
 
         page.close();
         browser.close();
