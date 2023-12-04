@@ -269,22 +269,24 @@ public class App1Test {
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
         page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
-
         Locator listEle = page.locator("//h3[@class='search-result__title']");
 //        Find the First Element using the first method
         listEle.first().click();
 
 //        Find the First Element using Nth Method
         page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
-        listEle.nth(0).click();
+        Locator listEle2 = page.locator("//h3[@class='search-result__title']");
+        listEle2.nth(0).click();
 
 //        Find the Last Element using the last method
         page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
-        listEle.last().click();
+        Locator listEle3 = page.locator("//h3[@class='search-result__title']");
+        listEle3.last().click();
 
 //        Find the Last Element using Nth Method
         page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
-        listEle.nth(-1).click();
+        Locator listEle4 = page.locator("//h3[@class='search-result__title']");
+        listEle4.nth(-1).click();
 
         page.close();
         browser.close();
@@ -317,6 +319,12 @@ public class App1Test {
         page.close();
         browser.close();
         playwright.close();
+
+    }
+
+    @Test
+    @DisplayName("Using XPath")
+    public void usingPathTest() {
 
     }
 }
