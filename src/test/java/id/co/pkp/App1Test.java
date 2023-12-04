@@ -1,5 +1,6 @@
 package id.co.pkp;
 
+import com.microsoft.playwright.Dialog;
 import com.microsoft.playwright.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -495,7 +496,7 @@ public class App1Test {
     }
 
     @Test
-    @DisplayName("Handle Alert in Playwright Java")
+    @DisplayName("Handle Alert Button in Playwright Java")
     public void handleAlertTest() {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
@@ -504,11 +505,45 @@ public class App1Test {
         Page page = newContext.newPage();
 
         page.navigate("http://autopract.com/selenium/alert5/");
-        page.onDialog(dialog -> {
-            dialog.accept();
-        });
-
+        page.onDialog(Dialog::accept);
         page.locator("#alert-button").click();
+
+        newContext.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Handle Alert Confirm in Playwright Java")
+    public void handleAlertConfirmTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        BrowserContext newContext = browser.newContext(
+                new Browser.NewContextOptions().setRecordVideoDir(Paths.get("Videos/")).setRecordVideoSize(1280, 720));
+        Page page = newContext.newPage();
+
+        page.navigate("http://autopract.com/selenium/alert5/");
+        page.onDialog(Dialog::dismiss);
+        page.locator("#confirm-button").click();
+
+        newContext.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Handle Alert Prompt in Playwright Java")
+    public void handleAlertPromptTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        BrowserContext newContext = browser.newContext(
+                new Browser.NewContextOptions().setRecordVideoDir(Paths.get("Videos/")).setRecordVideoSize(1280, 720));
+        Page page = newContext.newPage();
+
+        page.navigate("http://autopract.com/selenium/alert5/");
+        page.onDialog(dialog -> {
+            dialog.accept("20");
+        });
+        page.locator("#prompt-button").click();
+
         newContext.close();
         playwright.close();
     }
