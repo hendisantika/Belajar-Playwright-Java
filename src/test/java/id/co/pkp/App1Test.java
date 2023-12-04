@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.awt.*;
+import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -460,6 +461,55 @@ public class App1Test {
 
         page.close();
         browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Handle Multiple Tabs in Playwright Java")
+    public void Test() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+
+        page.navigate("https://www.programsbuzz.com/");
+
+        page.waitForPopup(new Page.WaitForPopupOptions().setPredicate(p -> p.context().pages().size() == 2), () -> {
+            page.locator("a[href='https://www.ivagus.com']").click();
+        });
+
+        List<Page> pages = page.context().pages();
+
+        for (Page tabs : pages) {
+            tabs.waitForLoadState();
+            System.out.println(tabs.url());
+        }
+
+        Page pbPage = pages.get(0);
+        Page ivagusPage = pages.get(1);
+
+        System.out.println(pbPage.url());
+        System.out.println(ivagusPage.url());
+
+        page.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Handle Alert in Playwright Java")
+    public void handleAlertTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        BrowserContext newContext = browser.newContext(
+                new Browser.NewContextOptions().setRecordVideoDir(Paths.get("Videos/")).setRecordVideoSize(1280, 720));
+        Page page = newContext.newPage();
+
+        page.navigate("http://autopract.com/selenium/alert5/");
+        page.onDialog(dialog -> {
+            dialog.accept();
+        });
+
+        page.locator("#alert-button").click();
+        newContext.close();
         playwright.close();
     }
 
