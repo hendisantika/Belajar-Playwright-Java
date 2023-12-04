@@ -1031,6 +1031,38 @@ public class App1Test {
         // closing the instances
         browser.close();
         playwright.close();
+    }
+
+    @Test
+    @DisplayName("Switching between tabs")
+    public void switchingBetweenTabsTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+
+        // creating a BrowserContext
+        BrowserContext browserContext = browser.newContext();
+
+        // creating a page
+        Page page1 = browserContext.newPage();
+
+        // Navigating to the URL
+        page1.navigate("https://testkru.com/Elements/TextFields");
+
+        // Opening second tab
+        Page page2 = browserContext.newPage();
+        page2.navigate("https://testkru.com/Elements/Buttons");
+
+        // get all pages
+        List<Page> pages = browserContext.pages();
+
+        // iterate over pages
+        for (Page singlePage : pages) {
+            System.out.println("Title of the page: " + singlePage.title());
+        }
+
+        // closing the instances
+        browser.close();
+        playwright.close();
 
     }
 
