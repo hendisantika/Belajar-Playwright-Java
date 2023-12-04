@@ -61,6 +61,8 @@ P
 java:S2699ö"-Add at least one assertion to this test case.(îõ«şÿÿÿÿ8ıÏ¢Ã1
 K
 java:S2699"-Add at least one assertion to this test case.(ËäŸ8Ñ³©¢Ã1
+P
+java:S2699ª"-Add at least one assertion to this test case.(³Òë‰ÿÿÿÿÿ8 Å±¢Ã1
 :
 java:S5786%"Remove this 'public' modifier.(Å¾Êh8ˆì‡¢Ã1
 @
@@ -133,7 +135,9 @@ A
 java:S5786ö"Remove this 'public' modifier.(îõ«şÿÿÿÿ8‰ì‡¢Ã1
 <
 java:S5786"Remove this 'public' modifier.(ËäŸ8ÃĞ¢Ã1
+A
+java:S5786ª"Remove this 'public' modifier.(³Òë‰ÿÿÿÿÿ8Ò³©¢Ã1
 ;
-java:S5786""Remove this 'public' modifier.(€Ì¾™8Ò³©¢Ã1
+java:S5786""Remove this 'public' modifier.(€Ì¾™8¡Å±¢Ã1
 t
 java:S3415í"VSwap these 2 arguments so they are in the correct order: expected value, actual value.(Ÿ½ú8ì‡¢Ã1
