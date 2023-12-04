@@ -961,11 +961,16 @@ public class App1Test {
 
         // Navigating to the URL
         page.navigate("https://testkru.com/Interactions/Frames");
+        // switching to the child frame
+        Frame childFrame = page.frame("singleFrame");
 
         FrameLocator frameLocator = page.frameLocator("#frame1").first();
 
         Locator locator2 = frameLocator.locator("h1");
         System.out.println("Text written inside the frame: " + locator2.innerText());
+
+        // switching back to parent frame
+        Frame parentFrame = childFrame.parentFrame();
 
         // closing the instances
         browser.close();
