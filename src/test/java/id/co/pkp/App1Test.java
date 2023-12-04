@@ -412,16 +412,34 @@ public class App1Test {
         page.locator("//input[@value='two']").click();
 
 //        Using Check
-        page.navigate("http://autopract.com/selenium/form5//");
+//        page.navigate("http://autopract.com/selenium/form5//");
         page.locator("//input[@value='four']").check();
 
 //        Using Uncheck
-        page.navigate("http://autopract.com/selenium/form5//");
+//        page.navigate("http://autopract.com/selenium/form5//");
         page.locator("//input[@value='four']").uncheck();
 
-        page.navigate("http://autopract.com/selenium/form5/");
+//        page.navigate("http://autopract.com/selenium/form5/");
         page.locator("input[value='CA']").click();
         page.locator("input[value='mac']").check();
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Handle Frame in Playwright Java")
+    public void handleFrameTest() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
+        Page page = browser.newPage();
+        page.navigate("http://www.maths.surrey.ac.uk/explore/nigelspages/frame2.htm");
+
+        FrameLocator middleFrame = page.frameLocator("//frame[@src='message.htm']");
+
+        middleFrame.locator("//input[@name='name']").type("Naruto Uzumaki");
+        middleFrame.locator("//textarea[@name='suggestions']").type("I Am Inside The Frame");
 
         page.close();
         browser.close();
