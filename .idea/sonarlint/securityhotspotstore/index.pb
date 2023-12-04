@@ -7,3 +7,5 @@ Q
 !src/main/java/id/co/pkp/App1.java,2/8/2804a8e24638106771efc8c8a2108f0a133507b6
 `
 0src/test/java/id/co/pkp/retry/RetryAnalyzer.java,2/9/292e1d5555934c31b40f221fe483bd5bdd18d3bd
+X
+(src/test/java/id/co/pkp/retry/Retry.java,2/f/2f8357e6ec29a75f6c8605e13dce2b79b0b3c8d0
