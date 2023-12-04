@@ -9,3 +9,5 @@ Q
 0src/test/java/id/co/pkp/retry/RetryAnalyzer.java,2/9/292e1d5555934c31b40f221fe483bd5bdd18d3bd
 X
 (src/test/java/id/co/pkp/retry/Retry.java,2/f/2f8357e6ec29a75f6c8605e13dce2b79b0b3c8d0
+X
+(src/test/java/id/co/pkp/retry/PopUp.java,2/3/23e7e5f436962c2eb217376cb7e37c67afa841e7
