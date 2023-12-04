@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import java.awt.*;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -301,8 +302,18 @@ public class App1Test {
         Locator listEle = page.locator("//h3[@class='search-result__title']");
 
         int count = listEle.count();
-
         Assert.assertEquals(count, 10);
+
+//        Nth content filter
+        page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
+        String textContent = listEle.nth(1).textContent();
+        System.out.println(textContent);
+
+//        Display a list of texts
+        page.navigate("https://www.programsbuzz.com/search/node?keys=playwright+java");
+        List<String> allTextContents = listEle.allTextContents();
+        System.out.println(allTextContents);
+
         page.close();
         browser.close();
         playwright.close();
