@@ -2,19 +2,9 @@ package id.co.pkp;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.microsoft.playwright.APIRequestContext;
-import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserContext;
-import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Dialog;
-import com.microsoft.playwright.Download;
-import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Frame;
-import com.microsoft.playwright.FrameLocator;
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.Response;
+import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.RequestOptions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -53,12 +43,12 @@ public class App1Test {
         Browser browser = playwright.chromium().launch();
         Page page = browser.newPage();
         page.navigate("https://www.google.co.id/");
-        System.out.println( "Page Title nya adalah: "+page.title());
+        System.out.println("Page Title nya adalah: " + page.title());
     }
 
     @Test
     @DisplayName("Check URL or Check HTTPS")
-    public void testCheckHTTPS(){
+    public void testCheckHTTPS() {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
@@ -77,7 +67,7 @@ public class App1Test {
 
     @Test
     @DisplayName("Check Place Holder")
-    public void checkPlaceHolder(){
+    public void checkPlaceHolder() {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
@@ -105,7 +95,7 @@ public class App1Test {
 
     @Test
     @DisplayName("Assert Checkbox")
-    public void assertCheckBox(){
+    public void assertCheckBox() {
         Playwright playwright = Playwright.create();
         Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false));
         Page page = browser.newPage();
@@ -686,6 +676,29 @@ public class App1Test {
         waitForDownload.cancel() - This will cancel the download when clicked.
         waitForDownload.failure() - Returns download error.
         waitForDownload.delete() - This will delete the downloaded file.*/
+    }
+
+    @Test
+    @DisplayName("Download File in Playwright Java 2")
+    public void downloadFileTest2() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setDownloadsPath(Paths.get("Downloads/")).setHeadless(false).setSlowMo(200));
+        BrowserContext context = browser.newContext(new Browser.NewContextOptions().setAcceptDownloads(true));
+        Page page = context.newPage();
+        //https://playwright.dev/java/docs/api/class-keyboard
+        page.navigate("https://the-internet.herokuapp.com/download");
+        Download download = page.waitForDownload(() -> {
+            // Perform the action that initiates download
+            page.click("[href=\"download/dummy.pdf\"]");
+        });
+// Wait for the download process to complete
+        Path path = download.path();
+        System.out.println(path.toString());
+        page.pause();
+        page.close();
+        browser.close();
+        playwright.close();
+
     }
 
     @Test
