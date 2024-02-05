@@ -2,9 +2,19 @@ package id.co.pkp;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.microsoft.playwright.APIRequestContext;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Dialog;
+import com.microsoft.playwright.Download;
+import com.microsoft.playwright.FileChooser;
 import com.microsoft.playwright.Frame;
-import com.microsoft.playwright.*;
+import com.microsoft.playwright.FrameLocator;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.RequestOptions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -687,6 +697,27 @@ public class App1Test {
         page.navigate("http://autopract.com/selenium/upload1/");
         page.setInputFiles("//input[@type='file']",
                 Paths.get("/Users/hendisantika/IdeaProjects/fincore/demo-playwright/Uploads/ayana.png"));
+
+        page.close();
+        browser.close();
+        playwright.close();
+    }
+
+    @Test
+    @DisplayName("Upload File in Playwright Java 2")
+    public void uploadFileTest2() {
+        Playwright playwright = Playwright.create();
+        Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(200));
+        BrowserContext context = browser.newContext(new Browser.NewContextOptions().setAcceptDownloads(true));
+        Page page = context.newPage();
+        //https://playwright.dev/java/docs/api/class-keyboard
+        page.navigate("https://the-internet.herokuapp.com/upload");
+        FileChooser fileChooser = page.waitForFileChooser(() -> page.click("#file-upload"));
+        fileChooser.setFiles(Paths.get("/Users/hendisantika/IdeaProjects/fincore/demo-playwright/Uploads/ayana.png"));
+        page.click("input:has-text(\"Upload\")");
+        page.waitForLoadState();
+        System.out.println(page.locator("#uploaded-files").textContent());
+        page.pause();
 
         page.close();
         browser.close();
