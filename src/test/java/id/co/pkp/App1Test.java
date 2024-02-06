@@ -865,7 +865,7 @@ public class App1Test {
     }
 
     @Test
-    @DisplayName("Put API Request using Playwright Java")
+    @DisplayName("Patch API Request using Playwright Java")
     public void patchAPIRequestTest() {
         Playwright playwright = Playwright.create();
         APIRequestContext request = playwright.request().newContext();
